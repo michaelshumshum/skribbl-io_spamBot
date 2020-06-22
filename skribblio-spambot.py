@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 playerMinThreshold = 3 #Enter the minimum player threshold you desire (Note that the threshold includes the bot as well)
-driverDirectory = '/Users/michaelshum/Downloads/chromedriver' #Put the directory of the chromedriver here.
+driverDirectory = 'THE DIRECTORY' #Put the directory of the chromedriver here.
 
 chrome_options = Options()
 chrome_options.add_argument("--headless")  #Disable if you want to see the game.
