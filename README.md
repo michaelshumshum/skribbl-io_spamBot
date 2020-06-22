@@ -19,4 +19,4 @@ join skribbl.io games and spam random text with this script. if you play this ga
 ## optional stuff
 - you can change `playerMinThreshold` on line 7 to whatever player count you want. don't put anything lower than 2 (obviously) or higher than 8 (max players in a game).
 - feel free to change the text it spams, the name of the bot, and the chat it shows.
-- you can disable line 11 if you want to see the game. i have the option so i can free up some ram.
+- you can disable line 11 if you want to see the game. i have the option turned on so i can free up some ram.
