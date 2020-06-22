@@ -12,6 +12,7 @@ join skribbl.io games and spam random text with this script. if you play this ga
 - anti-spam detection
 
 ## prerequisites 
+- get python (duh).
 - install selenium into your shell/into IDLE using pip install. search that up if u dont know what to do.
 - in the script, change the 'driverDirectory' to where your chromedriver is located. i included the driver in here, just put in the directory.
 
