@@ -28,4 +28,5 @@ V1.0
 V1.1
 - imported the threading module to read chat live instead of updating every 5 seconds.
 - code has been optimised to look neater.
+- removed `loadingLonger` check as it caused a bug where it would fail if the first attempt didn't load. also, it wasn't very necessary in most cases as the page rarely affected     you finding games.
 - starting work on botswarm.
