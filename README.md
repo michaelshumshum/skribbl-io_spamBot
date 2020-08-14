@@ -22,17 +22,20 @@ join skribbl.io games and spam random text with this script. if you play this ga
 - you can disable line 123 if you want to see the game. i have the option turned on so i can free up some ram.
 
 ## CHANGELOG
+
 V1.1.1
 - `disconnectCheck` is now run as a thread, instead of a called function. as long as only one of these bots are run at a time, it should not be a problem with workload.
 - whenver a player leaves, you get notified of how many players are still in the game.
 - spam detection has been changed to update live along side the `chatupdates`
 - spam intervals has been changed to 0.85 seconds vs 1 second.
 - every 15 attempts, the browser will restart. before, every 10 seconds, it would just switch to a new tab, which was completely retarded.
+
 V1.1
 - imported the threading module to read chat live instead of updating every 5 seconds.
 - code has been optimised to look neater.
 - removed `loadingLonger` check as it caused a bug where it would fail if the first attempt didn't load. also, it wasn't very necessary in most cases as the page rarely affected     you finding games.
 - starting work on botswarm.
+
 V1.0
 - initial release.
 
