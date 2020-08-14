@@ -13,6 +13,7 @@ disconnect = False
 d_reason = 1
 pause = False
 endthreads = False
+kicked = False
 
 print('\nEntering skribbl.io...')
 
@@ -30,7 +31,7 @@ def chatupdates():
 	print('==============================')
 	print('[SHOWING CHAT NOW]')
 
-	while endthreads != True:
+	while (endthreads != True) and (kicked != True):
 		playerCount = (driver.find_element_by_xpath('//*[@id="containerGamePlayers"]')).size['height'] / 48
 		if playerCount != playerCountStore:
 			print('\n[{} PLAYERS IN GAME.]\n').format(playerCount)
@@ -38,6 +39,7 @@ def chatupdates():
 		chatLogLatest = (driver.find_element_by_xpath('//*[@id="boxMessages"]/p[last()]').text)
 		if (chatLogLatest == "Spam detected! You're sending too many messages."):
 			pause = True
+			chatLogLatest = ''
 		else:
 			pause = False
 
@@ -45,7 +47,7 @@ def chatupdates():
 		if chatLogHistory != chatLog:
 			print(chatLog.replace(chatLogHistory,'').strip('\n'))
 		chatLogHistory = chatLog
-		
+
 	print('[STOPPED SHOWING CHAT]')
 	print('==============================')
 
@@ -60,22 +62,35 @@ def randomString(stringLength):
 def disconnectCheck(): #Function to determine if the bot should disconnect.
 	global disconnect
 	global d_reason
+	global kicked
+
 	disconnect = False
-	while disconnect == False:
+	kicked == False
+
+	while (disconnect == False) and (kicked != True):
 		playerCount = (driver.find_element_by_xpath('//*[@id="containerGamePlayers"]')).size['height'] / 48
-		if playerCount < playerMinThreshold:
+		if (playerCount < playerMinThreshold) and (playerCount != 0):
 			disconnect = True
+			print('\n[NOT ENOUGH PLAYERS IN THE GAME! PREPARING TO LEAVE...]\n')
 			d_reason = 1
 		elif (driver.find_element_by_xpath('//*[@id="overlay"]/div').get_attribute('style') == "bottom: 0%;") and (driver.find_element_by_xpath('//*[@id="overlay"]/div/div[1]').text == "Choose a word"):
 			disconnect = True
+			print('\n[YOU WERE CHOSEN TO DRAW! PREPARING TO LEAVE...]\n')
 			d_reason = 2
 		else:
 			disconnect = False
 
+		if driver.find_element_by_xpath('//*[@id="modalKicked"]').get_attribute('style') == "display:block;":
+			kicked = True
+			print('\n[YOU WERE KICKED BY THE SERVER CONSOLE! FINDING A NEW GAME]\n')
+		else:
+			kicked = False
+
 def chatSpam(): #Chat spam function
 	global pause
 	global endthreads
-	while(True):
+
+	while (kicked != True) and (disconnect == False):
 		chatSend(randomString(random.randint(1,99)))
 		if disconnect == False:
 			if pause == True:
@@ -83,17 +98,17 @@ def chatSpam(): #Chat spam function
 				time.sleep(5)
 			else:
 				time.sleep(0.85)
-		elif disconnect == True:
-			if d_reason == 2:
-				chatSend("Sorry, I wasn't made to draw. I was made only to spam.")
-			if d_reason == 1:
-				chatSend("You guys suck. I'm outta here.")
-			chatSend('Your terror with me is now over. Take care now!')
-			tc.join()
-			td.join()
-			time.sleep(3)
-			endthreads = True
-			break
+
+	if kicked != True:
+		if d_reason == 2:
+			chatSend("Sorry, I wasn't made to draw. I was made only to spam.")
+		if d_reason == 1:
+			chatSend("You guys suck. I'm outta here.")
+		chatSend('Your terror with me is now over. Take care now!')
+	td.join()
+	time.sleep(2)
+	endthreads = True
+	tc.join()
 
 def gameSearch():
 	global tryCount
@@ -138,10 +153,10 @@ def joinedGameStart():
 	chatSend('Please enjoy hell with me! *If you copy me, you will probably get kicked.') #Feel free to change this line.
 	time.sleep(2.5)
 
-	tc = Thread(target=chatupdates)
+	tc = Thread(target=chatupdates, name='chat-update-thread')
 	tc.start()
 
-	td = Thread(target=disconnectCheck)
+	td = Thread(target=disconnectCheck, name='disconnect-check-thread')
 	td.start()
 
 def initfunc():
@@ -162,6 +177,3 @@ while True:
 	gameSearch()
 	time.sleep(1)
 	chatSpam()
-
-
-	
