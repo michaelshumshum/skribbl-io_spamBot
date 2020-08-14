@@ -12,6 +12,7 @@ join skribbl.io games and spam random text with this script. if you play this ga
 - anti-spam detection
 
 ## prerequisites 
+- make sure to have the latest version of google chrome.
 - get python 2.7. if you have python 3, some of the lines will give you errors due to the updated api.
 - install selenium using `pip install`. search that up if u dont know what to do.
 - in the script, change the `driverDirectory` on line 9 to where your chromedriver is located. i included the driver in this repo, just put in the directory.
