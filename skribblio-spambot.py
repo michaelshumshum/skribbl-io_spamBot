@@ -11,42 +11,47 @@ url = 'https://skribbl.io'
 
 disconnect = False
 d_reason = 1
+pause = False
+endthreads = False
 
-print('\n-------------------------------')
-print('Entering skribbl.io...')
+print('\nEntering skribbl.io...')
 
-def printchat():
+def chatupdates():
 	global chatLogHistory
 	global chatLogLatest
+	global pause
+	global playerCount
+	global endthreads
+
+	endthreads = False
+	playerCountStore = playerCount
+	chatLogHistory = ''
+	
 	print('==============================')
 	print('[SHOWING CHAT NOW]')
-	while(True):
-		if disconnect == False:
-			chatLog = (driver.find_element_by_xpath('//*[@id="boxMessages"]').text)
-			if chatLogHistory != chatLog:
-				print(chatLog.replace(chatLogHistory,'').strip('\n'))
-			chatLogHistory = chatLog
+
+	while endthreads != True:
+		playerCount = (driver.find_element_by_xpath('//*[@id="containerGamePlayers"]')).size['height'] / 48
+		if playerCount != playerCountStore:
+			print('\n[{} PLAYERS IN GAME.]\n').format(playerCount)
+			playerCountStore = playerCount
+		chatLogLatest = (driver.find_element_by_xpath('//*[@id="boxMessages"]/p[last()]').text)
+		if (chatLogLatest == "Spam detected! You're sending too many messages."):
+			pause = True
 		else:
-			time.sleep(1)
-			chatLog = (driver.find_element_by_xpath('//*[@id="boxMessages"]').text)
-			if chatLogHistory != chatLog:
-				print(chatLog.replace(chatLogHistory,'').strip('\n'))
-			chatLogHistory = chatLog
-			print '[STOPPED SHOWING CHAT]'
-			print('==============================')
-			return False
+			pause = False
+
+		chatLog = (driver.find_element_by_xpath('//*[@id="boxMessages"]').text)
+		if chatLogHistory != chatLog:
+			print(chatLog.replace(chatLogHistory,'').strip('\n'))
+		chatLogHistory = chatLog
+		
+	print('[STOPPED SHOWING CHAT]')
+	print('==============================')
 
 def chatSend(theString):
 	driver.find_element_by_xpath('//*[@id="inputChat"]').send_keys(theString)
 	driver.find_element_by_xpath('//*[@id="inputChat"]').submit()
-
-def failedtoloadCheck(xpath):
-	while True:
-		try:
-			driver.find_element_by_xpath(xpath).click()
-			break
-		except:
-			driver.refresh()
 
 def randomString(stringLength):
 	lettersAndDigits = string.ascii_letters + string.digits
@@ -56,37 +61,39 @@ def disconnectCheck(): #Function to determine if the bot should disconnect.
 	global disconnect
 	global d_reason
 	disconnect = False
-	playerCount = (driver.find_element_by_xpath('//*[@id="containerGamePlayers"]')).size['height'] / 48
-	if playerCount < playerMinThreshold:
-		disconnect = True
-		d_reason = 1
-	if (driver.find_element_by_xpath('//*[@id="overlay"]/div').get_attribute('style') == "bottom: 0%;") and (driver.find_element_by_xpath('//*[@id="overlay"]/div/div[1]').text == "Choose a word"):
-		disconnect = True
-		d_reason = 2
+	while disconnect == False:
+		playerCount = (driver.find_element_by_xpath('//*[@id="containerGamePlayers"]')).size['height'] / 48
+		if playerCount < playerMinThreshold:
+			disconnect = True
+			d_reason = 1
+		elif (driver.find_element_by_xpath('//*[@id="overlay"]/div').get_attribute('style') == "bottom: 0%;") and (driver.find_element_by_xpath('//*[@id="overlay"]/div/div[1]').text == "Choose a word"):
+			disconnect = True
+			d_reason = 2
+		else:
+			disconnect = False
 
 def chatSpam(): #Chat spam function
-	global chatLogLatest
+	global pause
+	global endthreads
 	while(True):
-		chatLogLatest = (driver.find_element_by_xpath('//*[@id="boxMessages"]/p[last()]').text)
-		if 'left' in chatLogLatest:
-			playerCount = (driver.find_element_by_xpath('//*[@id="containerGamePlayers"]')).size['height'] / 48
-			print('[{} PLAYERS REMAINING.]').format(playerCount)
 		chatSend(randomString(random.randint(1,99)))
-		disconnectCheck()
 		if disconnect == False:
-			if (chatLogLatest == "Spam detected! You're sending too many messages."):
+			if pause == True:
+				print '[PAUSING...]'
 				time.sleep(5)
 			else:
-				time.sleep(1)
-		else:
+				time.sleep(0.85)
+		elif disconnect == True:
 			if d_reason == 2:
 				chatSend("Sorry, I wasn't made to draw. I was made only to spam.")
 			if d_reason == 1:
 				chatSend("You guys suck. I'm outta here.")
 			chatSend('Your terror with me is now over. Take care now!')
-			time.sleep(1)
-			t.join()
-			return False
+			tc.join()
+			td.join()
+			time.sleep(3)
+			endthreads = True
+			break
 
 def gameSearch():
 	global tryCount
@@ -94,7 +101,7 @@ def gameSearch():
 
 	tryCount = 0
 	while True:
-		if (tryCount % 10 == 0) and (tryCount != 0):
+		if (tryCount % 15 == 0) and (tryCount != 0):
 			print('\nRestarting browser in an attempt to find a game more quickly...\n')
 			driver.quit()
 			initfunc()
@@ -119,21 +126,23 @@ def gameSearch():
 			chatSend('Just passing through...')
 		else:
 			joinedGameStart()
-			return False
+			break
 
 def joinedGameStart():
 	global tryCount
 	global chatLogHistory
-	global t
-	chatLogHistory = ''
+	global tc
+	global td
 	print('[Attempt '),tryCount,(']: Found a game above threshold with '),playerCount,(' players! Initiating spam...\n')
-
-	t = Thread(target=printchat)
-	t.start()
-
 	chatSend('Hey there. I am spamBot. I am here to make this game hell for you.') #Feel free to change this line.
 	chatSend('Please enjoy hell with me! *If you copy me, you will probably get kicked.') #Feel free to change this line.
 	time.sleep(2.5)
+
+	tc = Thread(target=chatupdates)
+	tc.start()
+
+	td = Thread(target=disconnectCheck)
+	td.start()
 
 def initfunc():
 	chrome_options = Options()
@@ -151,6 +160,7 @@ def initfunc():
 initfunc()
 while True:
 	gameSearch()
+	time.sleep(1)
 	chatSpam()
 
 
