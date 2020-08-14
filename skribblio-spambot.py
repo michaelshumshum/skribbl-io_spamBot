@@ -5,7 +5,7 @@ from threading import *
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-playerMinThreshold = 2 #Enter the minimum player threshold you desire (Note that the threshold includes the bot as well)
+playerMinThreshold = 3 #Enter the minimum player threshold you desire (Note that the threshold includes the bot as well)
 driverDirectory = '/Users/michaelshum/Desktop/dumb_python_scripts/WebDrivers/chromedriver' #Put the directory of the chromedriver here.
 url = 'https://skribbl.io'
 
@@ -24,6 +24,7 @@ def chatupdates():
 	global playerCount
 	global endthreads
 
+	kicked = False
 	endthreads = False
 	playerCountStore = playerCount
 	chatLogHistory = ''
@@ -154,6 +155,8 @@ def joinedGameStart():
 	chatSend('Hey there. I am spamBot. I am here to make this game hell for you.') #Feel free to change this line.
 	chatSend('Please enjoy hell with me! *If you copy me, you will probably get kicked.') #Feel free to change this line.
 	time.sleep(2.5)
+	if playerCount > 2:
+		driver.find_element_by_xpath('//*[@id="containerPlayerlist"]/div[2]').click()
 
 	tc = Thread(target=chatupdates, name='chat-update-thread')
 	tc.start()
