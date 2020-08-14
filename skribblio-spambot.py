@@ -80,7 +80,7 @@ def disconnectCheck(): #Function to determine if the bot should disconnect.
 		else:
 			disconnect = False
 
-		if driver.find_element_by_xpath('//*[@id="modalKicked"]').get_attribute('style') == "display:block;":
+		if driver.find_element_by_xpath('//*[@id="modalKicked"]').get_attribute('style') == "display: block;":
 			kicked = True
 			print('\n[YOU WERE KICKED BY THE SERVER CONSOLE! FINDING A NEW GAME]\n')
 		else:
