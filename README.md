@@ -21,6 +21,11 @@ join skribbl.io games and spam random text with this script. if you play this ga
 - feel free to change the text it spams, the name of the bot, and the chat it shows.
 
 ## CHANGELOG
+V1.1.2
+- i accidentally removed a `kicked` check for when the server kicks it manually. that has been added into the `disconnectCheck` thread.
+- the reason to disconnect is provided when it is disconnecting.
+- the threads now behave properly. a lot of times, the threads would continue, even when it is supposed to leave, resulting in the code stopping and preventing the code to go any further.
+
 V1.1.1
 - `disconnectCheck` is now run as a thread, instead of a called function. as long as only one of these bots are run at a time, it should not be a problem with workload.
 - whenver a player leaves, you get notified of how many players are still in the game.
