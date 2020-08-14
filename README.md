@@ -14,15 +14,13 @@ join skribbl.io games and spam random text with this script. if you play this ga
 ## prerequisites 
 - get python 2.7. if you have python 3, some of the lines will give you errors due to the updated api.
 - install selenium using `pip install`. search that up if u dont know what to do.
-- in the script, change the `driverDirectory` on line 9 to where your chromedriver is located. i included the driver in this repo, just put in the directory.
+- in the script, change the `driverDirectory` on line 152 to where your chromedriver is located. i included the driver in this repo, just put in the directory.
 
 ## optional stuff
 - you can change `playerMinThreshold` on line 8 to whatever player count you want. don't put anything lower than 2 (obviously) or higher than 8 (max players in a game).
 - feel free to change the text it spams, the name of the bot, and the chat it shows.
-- you can disable line 123 if you want to see the game. i have the option turned on so i can free up some ram.
 
 ## CHANGELOG
-
 V1.1.1
 - `disconnectCheck` is now run as a thread, instead of a called function. as long as only one of these bots are run at a time, it should not be a problem with workload.
 - whenver a player leaves, you get notified of how many players are still in the game.
@@ -33,7 +31,7 @@ V1.1.1
 V1.1
 - imported the threading module to read chat live instead of updating every 5 seconds.
 - code has been optimised to look neater.
-- removed `loadingLonger` check as it caused a bug where it would fail if the first attempt didn't load. also, it wasn't very necessary in most cases as the page rarely affected     you finding games.
+- removed `loadingLonger` check as it caused a bug where it would fail if the first attempt didn't load. also, it wasn't very necessary in most cases as the page rarely affected you finding games.
 - starting work on botswarm.
 
 V1.0
