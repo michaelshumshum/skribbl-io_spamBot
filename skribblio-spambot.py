@@ -68,7 +68,7 @@ def disconnectCheck(): #Function to determine if the bot should disconnect.
 	global kicked
 
 	disconnect = False
-	kicked == False
+	kicked = False
 
 	while (disconnect == False) and (kicked != True):
 		playerCount = (driver.find_element_by_xpath('//*[@id="containerGamePlayers"]')).size['height'] / 48
