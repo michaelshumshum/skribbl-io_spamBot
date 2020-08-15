@@ -71,7 +71,10 @@ def disconnectCheck(): #Function to determine if the bot should disconnect.
 	kicked = False
 
 	while (disconnect == False) and (kicked != True):
-		playerCount = (driver.find_element_by_xpath('//*[@id="containerGamePlayers"]')).size['height'] / 48
+		try:
+			playerCount = (driver.find_element_by_xpath('//*[@id="containerGamePlayers"]')).size['height'] / 48
+		except:
+			playerCount = 0
 		if (playerCount < playerMinThreshold) and (playerCount != 0):
 			disconnect = True
 			print('\n[NOT ENOUGH PLAYERS IN THE GAME! PREPARING TO LEAVE...]\n')
