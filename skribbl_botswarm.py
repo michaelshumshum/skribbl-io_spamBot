@@ -11,18 +11,6 @@ url = 'https://skribbl.io'
 
 bots = []
 
-messages = ['George Floyd deserved to die! Fuck all niggers!', 
-'The Jews deserved the Holocaust! Hitler was a great man!', 
-'Nothing worse than tiny eyed chinks. Stay in China you fucking assholes!', 
-'Bow down to America you degenerate scum! Especially you Chinese faggots.', 
-'Stay in the fucking ghetto you niggers. There is no place for black rats like you!',
-'Legalize slavery! Chinks, Jews, and Niggers have no right to be free.',
-'Life would be better if only white men existed.',
-'Heil Hitler! He was the chosen one to bring reform to the world!',
-'Stay in Mexico you Spanish whores! Fucking build our wall already.',
-'Go back to Iraq and fight with the Taliban you fucking terrorists! Cant wait for 9/11 part 2.',
-'Cant wait to nuke all of you fucking bastards. See you in hell, sucking Satans dick.']
-
 def chatSend(theString):
 	driver.find_element_by_xpath('//*[@id="inputChat"]').send_keys(theString)
 	driver.find_element_by_xpath('//*[@id="inputChat"]').submit()
@@ -94,7 +82,7 @@ def botfunc():
 					print '{} has crashed. Restarting...'.format(b.name)
 					break
 
-for i in range(0,4):
+for i in range(0,8):
 	b = Process(target=botfunc, name='Bot {}'.format(i+1))
 	bots.append('bot{}'.format(i))
 	b.start()
