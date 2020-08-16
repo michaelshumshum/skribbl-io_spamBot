@@ -5,11 +5,19 @@
 join skribbl.io games and spam random text with this script. if you play this game, you probably have seen it floating around at times. it uses chromedriver from selenium to interact with google chrome and the website. i'm not the savviest at writing code, so feel free to point out anything.
 
 ## features
-- spams a random string of text at a random length every second. the spam can't be faster or else you will be automatically kicked super fast.
+regular bot:
+- spams a random string of text of a random length every second. the spam can't be faster or else you will be automatically kicked super fast.
 - prints live chat simultaneously
 - automatically finds games, even when you get disconnected.
 - when it's the bots turn to draw, it will automatically leave.
 - anti-spam detection
+bot swarm:
+- does the same thing as the regular bot, but summons 8 bots at the same time.
+- a few things are not implemented into this one:
+      = spam detection
+      = live chat updates
+- easier to customize compared to the normal bot.
+- crash detection, so the bots can run forever without issue.
 
 ## prerequisites 
 - make sure to have the latest version of google chrome.
@@ -22,6 +30,10 @@ join skribbl.io games and spam random text with this script. if you play this ga
 - feel free to change the text it spams, the name of the bot, and the chat it shows.
 
 ## CHANGELOG
+V2.0
+- release of bot swarm script
+- issue in the normal bot that needs attention:
+      = 50% of the time when kicked, the bot will crash
 V1.1.2
 - i accidentally removed a `kicked` check for when the server kicks it manually. in the rare case it happened, the bot didn't know what to do and crashed. that has been added into the `disconnectCheck` thread.
 - the reason to disconnect is provided when it is disconnecting.
