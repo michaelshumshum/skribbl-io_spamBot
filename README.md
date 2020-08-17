@@ -10,7 +10,7 @@ regular bot:
 - prints live chat simultaneously
 - automatically finds games, even when you get disconnected.
 - when it's the bots turn to draw, it will automatically leave.
-- anti-spam detection
+- anti-spam detection.
 bot swarm:
 - does the same thing as the regular bot, but summons 8 bots at the same time.
 - a few things are not implemented into this one:
