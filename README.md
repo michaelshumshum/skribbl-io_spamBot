@@ -36,7 +36,7 @@ v2.1
 - i will abadom the regular bot as it is pretty much useless. though, i will still keep it here.
 - what's next:
       > adding an accesible chatlog for each bot.
-      > better ue design
+      > better UI design
       
 V2.0
 - release of bot swarm script
