@@ -15,8 +15,8 @@ regular bot:
 bot swarm:
 - does the same thing as the regular bot, but summons 8 bots at the same time.
 - a few things are not implemented into this one:
-      = spam detection
-      = live chat updates
+      > spam detection
+      > live chat updates
 - easier to customize compared to the normal bot.
 - crash detection, so the bots can run forever without issue.
 
@@ -35,12 +35,12 @@ v2.1
 - bot swarm now has a simple UI that displays the status of each bot. uses the `npyscreen` module
 - i will abadom the regular bot as it is pretty much useless. though, i will still keep it here.
 - what's next:
-      = adding an accesible chatlog for each bot.
-      = better ue design
+      > adding an accesible chatlog for each bot.
+      > better ue design
 V2.0
 - release of bot swarm script
 - issue in the normal bot that needs attention:
-      = 50% of the time when kicked, the bot will crash
+      > 50% of the time when kicked, the bot will crash
 V1.1.2
 - i accidentally removed a `kicked` check for when the server kicks it manually. in the rare case it happened, the bot didn't know what to do and crashed. that has been added into the `disconnectCheck` thread.
 - the reason to disconnect is provided when it is disconnecting.
