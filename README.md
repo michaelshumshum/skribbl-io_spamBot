@@ -37,6 +37,7 @@ v2.1
 - what's next:
       > adding an accesible chatlog for each bot.
       > better ue design
+      
 V2.0
 - release of bot swarm script
 - issue in the normal bot that needs attention:
