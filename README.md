@@ -24,10 +24,10 @@ bot swarm:
 - make sure to have the latest version of google chrome.
 - get python 2.7. if you have python 3, some of the lines will give you errors due to the updated api.
 - install selenium and npyscreen using `pip install`. search that up if u dont know what to do.
-- in the script, change the `driverDirectory` on line 9 to where your chromedriver is located. i included the driver in this repo, just put in the directory.
+- in the script, change the `driverDirectory` on line 9 (line 13 in bot swarm) to where your chromedriver is located. i included the driver in this repo, just put in the directory.
 
 ## optional stuff
-- you can change `playerMinThreshold` on line 8 (line 13 in bto whatever player count you want. don't put anything lower than 2 (obviously) or higher than 8 (max players in a game).
+- you can change `playerMinThreshold` on line 8 whatever player count you want. don't put anything lower than 2 (obviously) or higher than 8 (max players in a game).
 - feel free to change the text it spams, the name of the bot, and the chat it shows.
 
 ## CHANGELOG
