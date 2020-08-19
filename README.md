@@ -42,6 +42,7 @@ V2.0
 - release of bot swarm script
 - issue in the normal bot that needs attention:
       > 50% of the time when kicked, the bot will crash
+      
 V1.1.2
 - i accidentally removed a `kicked` check for when the server kicks it manually. in the rare case it happened, the bot didn't know what to do and crashed. that has been added into the `disconnectCheck` thread.
 - the reason to disconnect is provided when it is disconnecting.
