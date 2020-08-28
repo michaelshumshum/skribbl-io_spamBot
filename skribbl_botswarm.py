@@ -41,7 +41,6 @@ def botfunc(queue,num):
 			try:
 				driver.find_element_by_xpath('//*[@id="inputName"]').send_keys('spamBot') #Feel free to change the name.
 				time.sleep(1)
-				driver.find_element_by_xpath('/html/body/div[2]/div/a[1]').click()
 				driver.find_element_by_xpath('//*[@id="formLogin"]/button[1]').click()
 				time.sleep(3)
 				while True:
