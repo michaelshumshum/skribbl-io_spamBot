@@ -1,5 +1,5 @@
 # skribbl.io - spamBot
-*kill games with spam*
+*kill games with spam (and spaghetti code)*
 
 ## about
 join skribbl.io games and spam random text with this script. if you play this game, you probably have seen it floating around at times. it uses chromedriver from selenium to interact with google chrome and the website. i'm not the savviest at writing code, so feel free to point out anything.
