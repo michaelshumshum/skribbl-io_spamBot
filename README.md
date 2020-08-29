@@ -35,7 +35,7 @@ v2.2
 - gui now looks more organized and has two additional widgets: choice and logs.
 - currently, choice only displays a list of bots that are in a game. logs doesn't do anything (yet).
 - the chat log works with one bot at a time right now as i haven't implemented 'switching' feature. if you want, uncomment lines 86 and 92 and change botcount on line 113 to 1. this performs similiary to the original bot, but the textbox isn't scrollable, so you will only be able to see the first few lines before it cuts off. in general, it's still pretty garbage and will be worked on.
-- in the next update, i am looking to change fully implement chat logs and allow it to work on multiple bots at a time. for now, you will have to live without it.
+- in the next update, i am looking to change and fully implement chat logs and allow it to work on multiple bots at a time. for now, you will have to live without it.
 - bot statuses now has a time in status column, telling how long the bot has been in it's current status.
 
 v2.1
